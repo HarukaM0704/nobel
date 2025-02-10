@@ -13,6 +13,7 @@
     "vite": "^6.0.5"
   },
   "dependencies": {
+    "jsx-dom": "^8.1.6",
     "phaser": "^3.87.0"
   }
 }

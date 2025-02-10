@@ -12,7 +12,7 @@ class loading extends Phaser.Scene {
 
     preload() {
         this.game = this.sys.game;
-
+        
         this.progressBar = this.add.rectangle(0, this.game.canvas.height / 2, 0, 8, 0xffffff);
         this.loadingText = this.add.text(this.game.canvas.width / 2, this.game.canvas.height / 2 - 30, 'loading...', {});
         this.loadingText.setOrigin(0.5);
@@ -24,6 +24,7 @@ class loading extends Phaser.Scene {
 
         this.load.image('street', 'src/assets/street.png');
         this.load.image('robot', 'src/assets/robot.png');
+        this.load.image('title', 'src/assets/title.png');
 
     }
 
