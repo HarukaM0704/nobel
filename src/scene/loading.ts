@@ -46,20 +46,21 @@ class loading extends Phaser.Scene {
 
     create() {
         // フェードアウトが完了したとき
-        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+        //this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
 
             if (this.progressBar) {
                 this.progressBar.destroy();
                 this.loadingText.destroy();
             }
 
-            this.cameras.main.fadeIn(1000, 0, 0, 0);
-        });
+         //   this.cameras.main.fadeIn(1000, 0, 0, 0);
+        //});
 
-        this.cameras.main.fadeOut(800, 0, 0, 0);
-        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-            this.scene.start('title');
-        });
+        //this.cameras.main.fadeOut(800, 0, 0, 0);
+        //this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            //this.scene.transition({target:'title',duration: 5000});
+            this.scene.transition({target: 'title', duration: 2000});
+        //});
     }
 }
 

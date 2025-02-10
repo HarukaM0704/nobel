@@ -13,6 +13,9 @@ const config: Phaser.Types.Core.GameConfig = {
   width: window.innerWidth,
   height: window.innerHeight,
   parent: 'game-app',  // #game-app内にcanvasを生成
+  dom: {
+    createContainer: true
+  },
   scene: Scenes
 };
 

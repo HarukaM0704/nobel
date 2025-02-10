@@ -5,19 +5,31 @@ class title extends Phaser.Scene {
         super('title');
     }
 
-    preload() {
-        
-    }
-
     create() {
 
         const {width, height} = this.sys.game.canvas;
 
-        this.cameras.main.fadeIn(1000, 0, 0, 0);    //時間、R,G,B
+        //let clicktext;
+
+        //this.cameras.main.fadeIn(1000, 0, 0, 0);    //時間、R,G,B
 
         this.add.image(width/2, height/2, 'title');
-        this.add.image(width/2, height/2, 'robot');
-        this.add.text(width/2, height/2,'Hello World!');
+        const robot = this.add.image(width/2, height/2, 'robot');
+        robot.setInteractive({
+            useHandCursor: true
+        });
+        //this.add.text(width/2, height/2,'Hello World!');
+
+        robot.on('pointerdown', () => {
+            //clicktext = this.add.text(200,400,'Click!!!!', {fontSize: '60px'});
+            //clicktext.setInteractive({
+            //    useHandCursor: true
+            //});
+            //this.add.dom(width/2, height/2, howtoplay);
+            this.scene.launch('test');
+        })
+
+ 
     }
 }
 

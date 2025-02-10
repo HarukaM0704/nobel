@@ -4,4 +4,8 @@ export default defineConfig({
     build: {
         assetsInlineLimit: 0,
     },
+    esbuild: {
+        jsxFactory: 'h',
+        jsxFragment: 'Fragment'
+    },
 });
