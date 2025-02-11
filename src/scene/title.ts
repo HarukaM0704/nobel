@@ -5,6 +5,10 @@ class title extends Phaser.Scene {
         super('title');
     }
 
+    init(){
+        this.cameras.main.fadeIn(1000, 255, 255, 255);    //時間、R,G,B
+    }
+
     create() {
 
         const {width, height} = this.sys.game.canvas;

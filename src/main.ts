@@ -12,10 +12,8 @@ const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,  // webGLを使うかcanvasを使うかをphaserが自動で判断してくれる
   width: window.innerWidth,
   height: window.innerHeight,
+  backgroundColor:'0xffe6b2',
   parent: 'game-app',  // #game-app内にcanvasを生成
-  dom: {
-    createContainer: true
-  },
   scene: Scenes
 };
 

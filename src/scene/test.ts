@@ -11,7 +11,7 @@ class test extends Phaser.Scene {
             useHandCursor: true
         })
         testtext.on('pointerdown', () => {
-            this.scene.start('title');
+            this.scene.sleep();
         })
     }
 }
