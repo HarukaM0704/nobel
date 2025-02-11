@@ -23,6 +23,8 @@ class test extends Phaser.Scene {
         testtext.setInteractive({
             useHandCursor: true
         })
+
+        
         back.on('pointerdown', () => {
             this.scene.sleep();
         })
