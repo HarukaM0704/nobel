@@ -8,4 +8,6 @@ export default defineConfig({
         jsxFactory: 'h',
         jsxFragment: 'Fragment'
     },
+
+    base: '/nobel/',
 });
