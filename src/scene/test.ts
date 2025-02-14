@@ -32,7 +32,7 @@ class test extends Phaser.Scene {
             userHandCursor: true
         })
 
-        buttonvisible();
+        contentvisible();
 
 
         
@@ -42,16 +42,16 @@ class test extends Phaser.Scene {
 
         prev.on('pointerdown', () => {
           currentpage -= 1;
-          buttonvisible();  
+          contentvisible();  
         })
 
         next.on('pointerdown', () => {
             currentpage += 1;
-            buttonvisible();
+            contentvisible();
         })
 
 
-        function buttonvisible() {
+        function contentvisible() {
             if(currentpage==1) {
                 prev.setVisible(false);
                 next.setVisible(true);
@@ -64,6 +64,7 @@ class test extends Phaser.Scene {
                 next.setVisible(true);
             }
         }
+
     }
 }
 
