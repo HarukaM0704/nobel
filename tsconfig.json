@@ -6,6 +6,8 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    //画像インポートで追加したやつ
+    "typeRoots": ["importImage", "node_modules@types"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",

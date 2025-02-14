@@ -22,9 +22,9 @@ class loading extends Phaser.Scene {
         // すべてのファイルのロードが完了したらローディング画面はフェードアウトしてメインのシーンに遷移する。
         this.scene.scene.load.on('complete', this._fadeoutMainCamera.bind(this));
 
-        this.load.image('street', './src/assets/street.png');
-        this.load.image('robot', './src/assets/robot.png');
-        this.load.image('title', './src/assets/title.png');
+        this.load.image('street', 'street.png');
+        this.load.image('robot', 'robot.png');
+        this.load.image('title', 'title.png');
 
     }
 
