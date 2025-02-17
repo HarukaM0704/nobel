@@ -13,8 +13,8 @@ class loading extends Phaser.Scene {
     preload() {
         this.game = this.sys.game;
         
-        this.progressBar = this.add.rectangle(0, this.game.canvas.height / 2, 0, 8, 0xffffff);
-        this.loadingText = this.add.text(this.game.canvas.width / 2, this.game.canvas.height / 2 - 30, 'loading...', {});
+        this.progressBar = this.add.rectangle(0, window.innerHeight / 2, 0, 8, 0xffffff);
+        this.loadingText = this.add.text(window.innerWidth / 2, window.innerHeight / 2 - 30, 'loading...', {});
         this.loadingText.setOrigin(0.5);
 
         // ロード進行中はプログレスバーの伸縮を進捗率に応じて変化させる。
@@ -26,6 +26,7 @@ class loading extends Phaser.Scene {
         this.load.image('robot', 'robot.png');
         this.load.image('title', 'title.png');
 
+
     }
 
      /** 
@@ -33,7 +34,7 @@ class loading extends Phaser.Scene {
      * @param percentage ローディングの進捗率。 
      */
      private _updateBar(percentage: number) {
-        this.progressBar.width = this.game.canvas.width * percentage;
+        this.progressBar.width = window.innerWidth * percentage;
     }
 
     /**
@@ -61,6 +62,14 @@ class loading extends Phaser.Scene {
             //this.scene.transition({target:'title',duration: 5000});
             this.scene.start('title');
         });
+
+        //画面サイズ変更時に行う処理
+        window.addEventListener('resize', () => {
+            this.game.scale.resize(window.innerWidth, window.innerHeight);
+            this.scene.scene.load.on('progress', this._updateBar.bind(this));
+            this.loadingText.setPosition(window.innerWidth / 2, window.innerHeight / 2 - 30)
+        });
+
     }
 }
 
