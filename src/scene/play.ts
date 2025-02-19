@@ -62,7 +62,7 @@ class play extends Phaser.Scene {
  //       const button01 = new Button(this, 200,100,"Button", {});
         //ボタンの配置を覚えておく配列
         const buttons[][] = [
-            [button00,button01,]//button02,button03,button04],
+            [button00,button01,button02,button03,button04],
             [button10,button11,button12,button13,button14],
             [button20,button21,button22,button23,button24],
             [button30,button31,button32,button33,button34],
@@ -71,10 +71,11 @@ class play extends Phaser.Scene {
 
         for(var i=0; i<buttons.length; i++ ){
             for(var j=0; j<buttons.length; j++){
+                var cattext="";
                 if(this.cat[i][j]!=0){
-                    const cattext="ねこ";
+                    cattext="ねこ";
                 }else{
-                    const cattext="いない";
+                    cattext="いない";
                 }
                 buttons[i][j] = new Button(this, 200,100,"Button", {
                         onClick(cattext);
