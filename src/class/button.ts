@@ -11,12 +11,12 @@ export default class Button extends Phaser.GameObjects.Container {
 	text: Phaser.GameObjects.Text = null;
 	container: Phaser.GameObjects.Rectangle = null;
 
-	constructor (scene: Phaser.Scene, x, y, text, props: Props, { align = 'center', fontSize = 15, color = "black" } = {}) {
+	constructor (scene: Phaser.Scene, x, y, text, cat, props: Props, { align = 'center', fontSize = 15, color = "black" } = {}) {
 		super(scene, x, y)
 
 		const {
-			width = 200,
-			height = 40,
+			width = 100,
+			height = 100,
 			onClick
 		} = props
 
@@ -26,15 +26,15 @@ export default class Button extends Phaser.GameObjects.Container {
 		this.setSize(width, height).setInteractive();
 
 		const alignLeft = align === 'left';
-		this.text = scene.add.text(alignLeft ? -width / 2 + 0 : 0, -1, text, { align, fontSize , color}).setOrigin(alignLeft ? 0 : 0.5, 0.5).setPadding(0, 2, 0, 0)
+		this.text = scene.add.text(alignLeft ? -width / 2 + 0 : 0, 0, text, { align, fontSize , color}).setOrigin(alignLeft ? 0 : 0.5, 0.5).setPadding(0, 2, 0, 0)
 		this.text.setColor("black");
 
-		this.container = scene.add.rectangle(0, 0, width / 2, height / 2);
+		this.container = scene.add.rectangle(0, 0, width, height/2);
 		this.container.setStrokeStyle(1, 0xffffff).setOrigin(alignLeft ? 0 : 0.5, 0.5)
 
 		this.add([this.container, this.text])
 		this.on('pointerdown', p => {
-			console.log("aaa");
+			console.log(cat);
 			this.text.setColor("black");
             onClick && onClick(p);
 		})

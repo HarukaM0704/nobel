@@ -26,8 +26,6 @@ class play extends Phaser.Scene {
         [0,0,0,0,0]
     ];
 
-
-
     //撫でた回数
     putcnt: number = 0;
     //猫ごとの撫でた回数
@@ -52,35 +50,30 @@ class play extends Phaser.Scene {
         //猫配置
         catset(this.catlength,this.cat);
 
+
         //画面構築
-//        const button00 = new Button(this, 100, 100, "Button", {
-//            onClick: () =>{
-//                console.log("Click!!");
-//            }
-//        })
 
- //       const button01 = new Button(this, 200,100,"Button", {});
         //ボタンの配置を覚えておく配列
-        const buttons[][] = [
-            [button00,button01,button02,button03,button04],
-            [button10,button11,button12,button13,button14],
-            [button20,button21,button22,button23,button24],
-            [button30,button31,button32,button33,button34],
-            [button40,button41,button42,button43,button44]
-        ]
+        var buttons:Button[][]=new Array(this.cat.length);
 
-        for(var i=0; i<buttons.length; i++ ){
-            for(var j=0; j<buttons.length; j++){
-                var cattext="";
-                if(this.cat[i][j]!=0){
-                    cattext="ねこ";
-                }else{
-                    cattext="いない";
+        for(var i=0; i<this.cat.length; i++ ){
+            //いったん一次配列に保存
+            var ButtonArray:Button[] = new Array(this.cat.length);
+            
+            for(var j=0; j<this.cat.length; j++){
+                var cattext=false;
+                if(this.cat[i][j] !== 0){
+                    cattext=true;
                 }
-                buttons[i][j] = new Button(this, 200,100,"Button", {
-                        onClick(cattext);
+                const setButton = new Button(this, 100*j+300,50*i+300,"Button"+i+j, cattext , {
+                    onClick: () =>{
+
+                    }
                 });
+
+                ButtonArray.push(setButton);
             }
+            buttons.push(ButtonArray);
         }
 
         //猫配置関数
