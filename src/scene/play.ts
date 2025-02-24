@@ -6,16 +6,7 @@ class play extends Phaser.Scene {
     //猫の数と猫の長さを決める
     catlength: number[] = [3,2,1]
     //撫でてもいい回数を決める
-    putmaxcnt: number = 28;
-        
-    //撫でた場所を覚えておく配列
-    putcheck: boolean[][] = [
-        [false,false,false,false,false],
-        [false,false,false,false,false],
-        [false,false,false,false,false],
-        [false,false,false,false,false],
-        [false,false,false,false,false]
-    ]
+    putmaxcnt: number = 15;
 
     //どの猫がどこにいるかを把握する配列
     cat: number[][]= [
@@ -52,29 +43,50 @@ class play extends Phaser.Scene {
 
 
         //画面構築
+        //左上に残り回数
+        const restput = this.add.text(50,50,this.putmaxcnt.toString());
 
-        //ボタンの配置を覚えておく配列
-        var buttons:Button[][]=new Array(this.cat.length);
+        const catimage:Phaser.GameObjects.Image[] = new Array;
+        //右側にのこりのねこ
+        this.add.text(500,100,"なでたねこ",{fontSize:30});
+        this.catlength.forEach((value, i) => {
+            console.log(i);
+            catimage[i] = this.add.image(500,200*i,'robot');
+        })
 
-        for(var i=0; i<this.cat.length; i++ ){
-            //いったん一次配列に保存
-            var ButtonArray:Button[] = new Array(this.cat.length);
-            
+        //ボタンを配置
+        for(var i=0; i<this.cat.length; i++){            
             for(var j=0; j<this.cat.length; j++){
-                var cattext=false;
-                if(this.cat[i][j] !== 0){
-                    cattext=true;
-                }
-                const setButton = new Button(this, 100*j+300,50*i+300,"Button"+i+j, cattext , {
-                    onClick: () =>{
 
+                const catcheck = this.cat[i][j];
+                const setButton = new Button(this, 85*j+100,85*i+100,"Button"+i+j,{  
+                    onClick: () => {
+                        if(!setButton.getClk()){
+                            this.putcnt++;
+                            restput.setText((this.putmaxcnt-this.putcnt).toString());
+                            if(catcheck!=0){
+                                this.putcat[catcheck-1]++;
+                            }
+                        
+                            var check=0;
+                            this.catlength.forEach((value, i) => {
+                                if(this.putcat[i]===value){
+                                    check++;
+                                }
+                            });
+                            if(check===this.catlength.length){
+                                console.log("clear!");
+                            }
+                            if(this.putcnt===this.putmaxcnt){
+                                console.log("gameover...");
+                            }
+                        }
                     }
                 });
 
-                ButtonArray.push(setButton);
             }
-            buttons.push(ButtonArray);
         }
+        
 
         //猫配置関数
         function catset(catlength:number[],cat:number[][]) {
