@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import play from "./play";
 
 class title extends Phaser.Scene {
     constructor() {
@@ -21,16 +22,20 @@ class title extends Phaser.Scene {
         //    useHandCursor: true
         //});
         //this.add.text(width/2, height/2,'Hello World!');
+
+        const container = this.add.container(innerWidth/2,innerHeight/2).setSize(back.width,back.height);
         
-        const playbtn = this.add.rectangle(back.width*0.5,back.height/4*3,200,100,0xffffff);
+        const playbtn = this.add.rectangle(-back.width/3,back.height/4,200,100,0xffffff);
         playbtn.setInteractive({
             useHandCursor: true
         });
 
-        const howtobtn = this.add.rectangle(back.width*1.1,back.height/4*3,200,100,0xffffff);
+        const howtobtn = this.add.rectangle(back.width/3,back.height/4,200,100,0xffffff);
         howtobtn.setInteractive({
             useHandCursor: true
         });
+
+        container.add([playbtn, howtobtn]);
 
         playbtn.on('pointerdown', () => {
             this.scene.start('play');
@@ -53,9 +58,13 @@ class title extends Phaser.Scene {
             this.game.scale.resize(window.innerWidth, window.innerHeight);
             back.setPosition(window.innerWidth/2,window.innerHeight/2);
             robot.setPosition(window.innerWidth/2,window.innerHeight/2);
+            container.setPosition(window.innerWidth/2,window.innerHeight/2);
         });
  
     }
 }
+
+
+
 
 export default title;

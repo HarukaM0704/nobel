@@ -65,6 +65,10 @@ class test extends Phaser.Scene {
             }
         }
 
+        window.addEventListener('resize', () => {
+            this.game.scale.resize(window.innerWidth, window.innerHeight);
+        });
+
     }
 }
 
