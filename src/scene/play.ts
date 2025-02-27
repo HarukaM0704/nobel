@@ -61,7 +61,7 @@ class play extends Phaser.Scene {
             for(var j=0; j<this.cat.length; j++){
 
                 const catcheck = this.cat[i][j];
-                const setButton = new Button(this, 85*j+100,85*i+100,"Button"+i+j,{  
+                const setButton = new Button(this, 85*j+100,85*i+100,"Button"+i+j, catcheck, {  
                     onClick: () => {
                         if(!setButton.getClk()){
                             this.putcnt++;

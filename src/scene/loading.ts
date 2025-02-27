@@ -25,6 +25,8 @@ class loading extends Phaser.Scene {
         this.load.image('street', 'street.png');
         this.load.image('robot', 'robot.png');
         this.load.image('title', 'title.png');
+        this.load.image('maru','maru.png');
+        this.load.image('batu','batu.png');
 
 
     }
