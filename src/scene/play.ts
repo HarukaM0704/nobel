@@ -79,9 +79,11 @@ class play extends Phaser.Scene {
                             });
                             if(check===this.catlength.length){
                                 console.log("clear!");
+                                this.scene.start('result',{result:true, cnt:this.putcnt});
                             }
                             if(this.putcnt===this.putmaxcnt){
-                                console.log("gameover...");
+                                console.log("gameover...")
+                                this.scene.start('result',{result:false, cnt:this.putcnt});
                             }
                         }
                     }
