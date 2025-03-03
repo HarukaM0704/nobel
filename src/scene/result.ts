@@ -13,7 +13,7 @@ class result extends Phaser.Scene {
 
     create(){
         //結果で出力内容が変わる
-        if(result){
+        if(this.result){
             //クリアパターン
 
         } else {

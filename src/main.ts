@@ -3,6 +3,7 @@
 import * as Phaser from 'phaser';
 import { Scenes } from './scene/scenes';
 
+
 const scale: Phaser.Types.Core.ScaleConfig = {
   mode: Phaser.Scale.FIT,
   autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -15,9 +16,6 @@ const config: Phaser.Types.Core.GameConfig = {
   scale: scale,
   backgroundColor:'0xffa791',
   parent: 'game-app',  // #game-app内にcanvasを生成
-  dom: {
-		createContainer: true
-	},
   scene: Scenes
 };
 

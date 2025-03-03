@@ -8,11 +8,10 @@ interface Props{
 }
 
 export default class Button extends Phaser.GameObjects.Container {
-	seKey: string = "";
 	text: Phaser.GameObjects.Text = null;
 	ans: Phaser.GameObjects.Image = null;
 	container: Phaser.GameObjects.Rectangle = null;
-	clk=false;
+	clk: boolean = false;
 	alertcontainer: Phaser.GameObjects.Rectangle = null;
 	alerttext: Phaser.GameObjects.Text = null;
 
