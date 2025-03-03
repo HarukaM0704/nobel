@@ -193,6 +193,11 @@ class play extends Phaser.Scene {
                 i++;            
             }
         }
+
+        window.addEventListener('resize', () => {
+            this.game.scale.resize(window.innerWidth, window.innerHeight);
+            this.cameras.main.setRotation(0)
+        });
     
 
     }

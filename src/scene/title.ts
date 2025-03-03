@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import play from "./play";
 
 class title extends Phaser.Scene {
     constructor() {
@@ -11,6 +10,28 @@ class title extends Phaser.Scene {
     }
 
     create() {
+
+        let win = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+
+        console.log('width:'+ window.innerWidth+ '  height:' + window.innerHeight);
+
+        const fit = () => {            
+            if(window.innerHeight>window.innerWidth){
+                if(win.height<window.innerHeight){
+                    this.game.scale.displaySize.setAspectRatio( window.innerHeight/window.innerWidth );
+                }
+                this.cameras.main.setRotation(Math.PI * 0.5);
+                
+            } else {
+                if(win.width<window.innerWidth){
+                    this.game.scale.displaySize.setAspectRatio( window.innerWidth/window.innerHeight );
+                }
+                this.cameras.main.setRotation(0);
+            }
+        }
 
         //let clicktext;
 
@@ -45,21 +66,21 @@ class title extends Phaser.Scene {
             this.scene.launch('test')
         })
 
-        robot.on('pointerdown', () => {
-            //clicktext = this.add.text(200,400,'Click!!!!', {fontSize: '60px'});
-            //clicktext.setInteractive({
-            //    useHandCursor: true
-            //});
-            //this.add.dom(width/2, height/2, howtoplay);
-            this.scene.launch('test');
-        })
+        fit();
 
         window.addEventListener('resize', () => {
             this.game.scale.resize(window.innerWidth, window.innerHeight);
             back.setPosition(window.innerWidth/2,window.innerHeight/2);
             robot.setPosition(window.innerWidth/2,window.innerHeight/2);
             container.setPosition(window.innerWidth/2,window.innerHeight/2);
+
+            fit();
+            win.height=window.innerHeight;
+            win.width=window.innerWidth;
+
         });
+        
+        
  
     }
 }
