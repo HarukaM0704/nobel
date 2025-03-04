@@ -8,12 +8,12 @@ interface Props{
 }
 
 export default class Button extends Phaser.GameObjects.Container {
-	text: Phaser.GameObjects.Text = null;
-	ans: Phaser.GameObjects.Image = null;
-	container: Phaser.GameObjects.Rectangle = null;
+	text: Phaser.GameObjects.Text;
+	ans: Phaser.GameObjects.Image;
+	container: Phaser.GameObjects.Rectangle;
 	clk: boolean = false;
-	alertcontainer: Phaser.GameObjects.Rectangle = null;
-	alerttext: Phaser.GameObjects.Text = null;
+	alertcontainer: Phaser.GameObjects.Rectangle;
+	alerttext: Phaser.GameObjects.Text;
 
 	constructor (scene: Phaser.Scene, x:number, y:number, text:string, cat:number, props: Props, { align = 'center', fontSize = 15, color = "black" } = {}) {
 		super(scene, x, y)
@@ -34,9 +34,9 @@ export default class Button extends Phaser.GameObjects.Container {
 		this.container.setStrokeStyle(1, 0xffffff).setOrigin(0.5);
 
 		if(cat!==0){
-			this.ans = scene.add.image(0,0,'maru').setSize(width,height).setAlpha(0);
+			this.ans = scene.add.image(0,0,'maru').setDisplaySize(width,height).setAlpha(0);
 		} else {
-			this.ans = scene.add.image(0,0,'batu').setSize(width,height).setAlpha(0);
+			this.ans = scene.add.image(0,0,'batu').setDisplaySize(width,height).setAlpha(0);
 		}
 
 		this.text = scene.add.text(0, 0, text, { align, fontSize , color}).setOrigin(0.5).setPadding(0, 0, 0, 0)
@@ -49,7 +49,7 @@ export default class Button extends Phaser.GameObjects.Container {
 		this.alerttext.setAlpha(0);
 
 		this.add([this.container, this.text, this.ans])
-		this.on('pointerdown', p => {
+		this.on('pointerdown', (p: any) => {
 			onClick && onClick(p);
 			if(this.clk){
 				this.alertcontainer.setAlpha(1);

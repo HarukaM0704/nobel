@@ -49,12 +49,15 @@ class play extends Phaser.Scene {
         const catimage:Phaser.GameObjects.Image[] = new Array;
         //右側にのこりのねこ
         this.add.text(500,100,"なでたねこ",{fontSize:30});
-        this.catlength.forEach((value, i) => {
+
+        this.catlength.forEach((_value, i) => {
             console.log(i);
             catimage[i] = this.add.image(500,100*i+200,'robot');
             catimage[i].setAlpha(0).setOrigin(0).setDisplaySize(100,100);
 
         })
+
+        
 
         //ボタンを配置
         for(var i=0; i<this.cat.length; i++){            

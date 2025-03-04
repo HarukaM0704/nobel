@@ -38,7 +38,7 @@ class title extends Phaser.Scene {
         //this.cameras.main.fadeIn(1000, 0, 0, 0);    //時間、R,G,B
 
         const back = this.add.image(window.innerWidth/2, window.innerHeight/2, 'title');
-        const robot = this.add.image(window.innerWidth/2, window.innerHeight/2, 'robot');
+        //const robot = this.add.image(window.innerWidth/2, window.innerHeight/2, 'robot');
         //robot.setInteractive({
         //    useHandCursor: true
         //});
@@ -46,17 +46,25 @@ class title extends Phaser.Scene {
 
         const container = this.add.container(innerWidth/2,innerHeight/2).setSize(back.width,back.height);
         
-        const playbtn = this.add.rectangle(-back.width/3,back.height/4,200,100,0xffffff);
+        const playbtn = this.add.image(-back.width/3,back.height/4,'playbtn').setDisplaySize(200,100).setAlpha(0.7);
         playbtn.setInteractive({
             useHandCursor: true
         });
 
-        const howtobtn = this.add.rectangle(back.width/3,back.height/4,200,100,0xffffff);
+        const howtobtn = this.add.image(back.width/3,back.height/4,'howtobtn').setDisplaySize(200,100).setAlpha(0.7);
         howtobtn.setInteractive({
             useHandCursor: true
         });
 
         container.add([playbtn, howtobtn]);
+
+        playbtn.on('pointerover', () => {
+            playbtn.setAlpha(1);
+        })
+
+        playbtn.on('pointerout', () => {
+            playbtn.setAlpha(0.7);
+        })
 
         playbtn.on('pointerdown', () => {
             this.scene.start('play');
@@ -66,12 +74,20 @@ class title extends Phaser.Scene {
             this.scene.launch('test')
         })
 
+        howtobtn.on('pointerover', () => {
+            howtobtn.setAlpha(1);
+        })
+
+        howtobtn.on('pointerout', () => {
+            howtobtn.setAlpha(0.7);
+        })
+
         fit();
 
         window.addEventListener('resize', () => {
             this.game.scale.resize(window.innerWidth, window.innerHeight);
             back.setPosition(window.innerWidth/2,window.innerHeight/2);
-            robot.setPosition(window.innerWidth/2,window.innerHeight/2);
+            //robot.setPosition(window.innerWidth/2,window.innerHeight/2);
             container.setPosition(window.innerWidth/2,window.innerHeight/2);
 
             fit();

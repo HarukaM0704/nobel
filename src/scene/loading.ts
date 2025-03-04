@@ -5,13 +5,19 @@ class loading extends Phaser.Scene {
     progressBar!: Phaser.GameObjects.Rectangle;
     wholeCanvas!: Phaser.GameObjects.Zone;
     loadingText!: any;
+    loadingimage!: Phaser.GameObjects.Image;
 
     constructor() {
         super('loading');
     }
 
+    init(){
+    }
+
     preload() {
+        
         this.game = this.sys.game;
+        
         
         this.progressBar = this.add.rectangle(0, window.innerHeight / 2, 0, 8, 0xffffff);
         this.loadingText = this.add.text(window.innerWidth / 2, window.innerHeight / 2 - 30, 'loading...', {});
@@ -27,6 +33,10 @@ class loading extends Phaser.Scene {
         this.load.image('title', 'title.png');
         this.load.image('maru','maru.png');
         this.load.image('batu','batu.png');
+        this.load.image('playbtn','playbtn.png');
+        this.load.image('howtobtn','howtobtn.png');
+        this.load.image('top','top.png');
+        this.load.image('onemore','onemore.png');
 
 
     }
@@ -54,6 +64,7 @@ class loading extends Phaser.Scene {
             if (this.progressBar) {
                 this.progressBar.destroy();
                 this.loadingText.destroy();
+ //               this.loadingimage.destroy();
             }
 
             this.cameras.main.fadeIn(1000, 255, 255, 255);
