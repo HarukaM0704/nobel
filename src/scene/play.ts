@@ -7,7 +7,6 @@ class play extends Phaser.Scene {
     catlength: number[] = [3,2,1]
     //撫でてもいい回数を決める
     putmaxcnt: number = 15;
-
     //どの猫がどこにいるかを把握する配列
     cat: number[][]= [
         [0,0,0,0,0],
@@ -30,41 +29,56 @@ class play extends Phaser.Scene {
     create() {
 
        const starttext = this.add.text(window.innerWidth/2,window.innerHeight/2,'start!!!',{fontSize: '60px'});
-
-        this.tweens.add({
+       this.tweens.add({
             targets: starttext,
             alpha: 0,
             duration: 3000,
             ease: 'Power2'
         });
 
+
+
         //猫配置
         catset(this.catlength,this.cat);
 
 
         //画面構築
+        const back = this.add.image(window.innerWidth/2,window.innerHeight/2, 'play');
+        const kotatu = this.add.image(back.x-20,back.y,'kotatu');
+        const container = this.add.container(kotatu.x,kotatu.y);
+        
         //左上に残り回数
-        const restput = this.add.text(50,50,this.putmaxcnt.toString());
-
-        const catimage:Phaser.GameObjects.Image[] = new Array;
+        const hand = this.add.image(-kotatu.width/2-70,-kotatu.height/2+20,'hand');
+        const ato = this.add.text(-kotatu.width/2-100,-kotatu.height/2-10,"あと",{fontSize:25, color:'gray'});
+        const restput = this.add.text(-kotatu.width/2-90,-kotatu.height/2+20,this.putmaxcnt.toString(),{fontSize:40,color:'gray'}).setOrigin(0);
+        const kai = this.add.text(-kotatu.width/2-60,-kotatu.height/2+60,"回",{fontSize:25, color:'gray'});
+        
+        const text = this.add.text(kotatu.width/2+10,-kotatu.height/3,"なでたねこ",{fontSize:30, color:'gray'});
+        container.add([hand, restput, ato, kai, text]);
+        
         //右側にのこりのねこ
-        this.add.text(500,100,"なでたねこ",{fontSize:30});
+        const beforecatimage:Phaser.GameObjects.Image[] = new Array;
+        const aftercatimage:Phaser.GameObjects.Image[] = new Array;
 
         this.catlength.forEach((_value, i) => {
-            console.log(i);
-            catimage[i] = this.add.image(500,100*i+200,'robot');
-            catimage[i].setAlpha(0).setOrigin(0).setDisplaySize(100,100);
+            beforecatimage[i] = this.add.image(kotatu.width/2+80,100*i-kotatu.height/6,'robot');
+            beforecatimage[i].setAlpha(1).setDisplaySize(100,100);
+
+            aftercatimage[i] = this.add.image(kotatu.width/2+80,100*i-kotatu.height/6,'robot');
+            aftercatimage[i].setAlpha(0).setDisplaySize(100,100);
+
+            container.add([beforecatimage[i], aftercatimage[i]]);
 
         })
 
         
 
-        //ボタンを配置
+        //ボタンを配置        
         for(var i=0; i<this.cat.length; i++){            
             for(var j=0; j<this.cat.length; j++){
 
                 const catcheck = this.cat[i][j];
-                const setButton = new Button(this, 85*j+100,85*i+100,"Button"+i+j, catcheck, {  
+                const setButton = new Button(this, -kotatu.width/3+85*j,-kotatu.height/3+85*i,"Button"+i+j, catcheck, {  
                     onClick: () => {
                         if(!setButton.getClk()){
                             this.putcnt++;
@@ -76,7 +90,8 @@ class play extends Phaser.Scene {
                             var check=0;
                             this.catlength.forEach((value, i) => {
                                 if(this.putcat[i]===value){
-                                    catimage[i].setAlpha(1);
+                                    beforecatimage[i].setAlpha(0);
+                                    aftercatimage[i].setAlpha(1);
                                     check++;
                                 }
                             });
@@ -91,7 +106,7 @@ class play extends Phaser.Scene {
                         }
                     }
                 });
-
+                container.add(setButton);
             }
         }
         

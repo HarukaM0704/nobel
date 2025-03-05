@@ -37,6 +37,9 @@ class loading extends Phaser.Scene {
         this.load.image('howtobtn','howtobtn.png');
         this.load.image('top','top.png');
         this.load.image('onemore','onemore.png');
+        this.load.image('play', 'play.png');
+        this.load.image('kotatu', 'kotatu.png');
+        this.load.image('hand', 'hand.png');
 
 
     }
