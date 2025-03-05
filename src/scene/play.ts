@@ -28,6 +28,28 @@ class play extends Phaser.Scene {
 
     create() {
 
+        let win = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+
+        console.log('width:'+ window.innerWidth+ '  height:' + window.innerHeight);
+
+        const fit = () => {            
+            if(window.innerHeight>window.innerWidth){
+                if(win.height<window.innerHeight){
+                    this.game.scale.displaySize.setAspectRatio( window.innerHeight/window.innerWidth );
+                }
+                this.cameras.main.setRotation(Math.PI * 0.5);
+                
+            } else {
+                if(win.width<window.innerWidth){
+                    this.game.scale.displaySize.setAspectRatio( window.innerWidth/window.innerHeight );
+                }
+                this.cameras.main.setRotation(0);
+            }
+        }
+
        const starttext = this.add.text(window.innerWidth/2,window.innerHeight/2,'start!!!',{fontSize: '60px'});
        this.tweens.add({
             targets: starttext,
@@ -110,6 +132,7 @@ class play extends Phaser.Scene {
             }
         }
         
+        fit();
 
         //猫配置関数
         function catset(catlength:number[],cat:number[][]) {
@@ -214,7 +237,14 @@ class play extends Phaser.Scene {
 
         window.addEventListener('resize', () => {
             this.game.scale.resize(window.innerWidth, window.innerHeight);
-            this.cameras.main.setRotation(0)
+            back.setPosition(window.innerWidth/2,window.innerHeight/2);
+            kotatu.setPosition(window.innerWidth/2,window.innerHeight/2);
+            container.setPosition(window.innerWidth/2,window.innerHeight/2);
+
+            fit();
+            win.height=window.innerHeight;
+            win.width=window.innerWidth;
+
         });
     
 
