@@ -7,19 +7,6 @@ class play extends Phaser.Scene {
     catlength: number[] = [3,2,1]
     //撫でてもいい回数を決める
     putmaxcnt: number = 15;
-    //どの猫がどこにいるかを把握する配列
-    cat: number[][]= [
-        [0,0,0,0,0],
-        [0,0,0,0,0],
-        [0,0,0,0,0],
-        [0,0,0,0,0],
-        [0,0,0,0,0]
-    ];
-
-    //撫でた回数
-    putcnt: number = 0;
-    //猫ごとの撫でた回数
-    putcat: number[] = [0,0,0];
 
     constructor() {
         super('play');
@@ -27,6 +14,20 @@ class play extends Phaser.Scene {
     
 
     create() {
+
+
+        //どの猫がどこにいるかを把握する配列
+        let cat: number[][]= [
+            [0,0,0,0,0],
+            [0,0,0,0,0],
+            [0,0,0,0,0],
+            [0,0,0,0,0],
+            [0,0,0,0,0]
+        ];
+        //撫でた回数
+        let putcnt: number = 0;
+        //猫ごとの撫でた回数
+        let putcat: number[] = [0,0,0];
 
         let win = {
             width: window.innerWidth,
@@ -61,7 +62,7 @@ class play extends Phaser.Scene {
 
 
         //猫配置
-        catset(this.catlength,this.cat);
+        catset(this.catlength,cat);
 
 
         //画面構築
@@ -83,10 +84,10 @@ class play extends Phaser.Scene {
         const aftercatimage:Phaser.GameObjects.Image[] = new Array;
 
         this.catlength.forEach((_value, i) => {
-            beforecatimage[i] = this.add.image(kotatu.width/2+80,100*i-kotatu.height/6,'robot');
-            beforecatimage[i].setAlpha(1).setDisplaySize(100,100);
+            beforecatimage[i] = this.add.image(kotatu.width/2+80,100*i-kotatu.height/6,'catbefore');
+            beforecatimage[i].setAlpha(0.7).setDisplaySize(100,100);
 
-            aftercatimage[i] = this.add.image(kotatu.width/2+80,100*i-kotatu.height/6,'robot');
+            aftercatimage[i] = this.add.image(kotatu.width/2+80,100*i-kotatu.height/6,'catafter');
             aftercatimage[i].setAlpha(0).setDisplaySize(100,100);
 
             container.add([beforecatimage[i], aftercatimage[i]]);
@@ -96,35 +97,39 @@ class play extends Phaser.Scene {
         
 
         //ボタンを配置        
-        for(var i=0; i<this.cat.length; i++){            
-            for(var j=0; j<this.cat.length; j++){
+        for(var i=0; i<cat.length; i++){            
+            for(var j=0; j<cat.length; j++){
 
-                const catcheck = this.cat[i][j];
+                const catcheck = cat[i][j];
                 const setButton = new Button(this, -kotatu.width/3+85*j,-kotatu.height/3+85*i,"Button"+i+j, catcheck, {  
                     onClick: () => {
                         if(!setButton.getClk()){
-                            this.putcnt++;
-                            restput.setText((this.putmaxcnt-this.putcnt).toString());
+                            putcnt++;
+                            restput.setText((this.putmaxcnt-putcnt).toString());
                             if(catcheck!=0){
-                                this.putcat[catcheck-1]++;
+                                putcat[catcheck-1]++;
                             }
                         
                             var check=0;
                             this.catlength.forEach((value, i) => {
-                                if(this.putcat[i]===value){
+                                if(putcat[i]===value){
                                     beforecatimage[i].setAlpha(0);
                                     aftercatimage[i].setAlpha(1);
                                     check++;
                                 }
                             });
+                            
                             if(check===this.catlength.length){
                                 console.log("clear!");
-                                this.scene.start('result',{result:true, cnt:this.putcnt});
+                                const data={result:true,cnt:putcnt};
+                                this.scene.start('result',data);
                             }
-                            if(this.putcnt===this.putmaxcnt){
+                            if(putcnt===this.putmaxcnt){
                                 console.log("gameover...")
-                                this.scene.start('result',{result:false, cnt:this.putcnt});
+                                const data={result:false,cnt:putcnt};
+                                this.scene.start('result',data);
                             }
+                            
                         }
                     }
                 });

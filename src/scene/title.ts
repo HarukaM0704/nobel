@@ -38,6 +38,16 @@ class title extends Phaser.Scene {
         //this.cameras.main.fadeIn(1000, 0, 0, 0);    //時間、R,G,B
 
         const back = this.add.image(window.innerWidth/2, window.innerHeight/2, 'title');
+        const scw = window.innerWidth/back.width;
+        const sch = window.innerHeight/back.height;
+
+        if(window.innerHeight>window.innerWidth){
+            back.setSize(back.height,back.width*scw).setDisplaySize(back.width,back.height);
+        }else{
+            back.setSize(back.width,back.height*sch).setDisplaySize(back.width,back.height);
+        }
+        console.log(back.width);
+        console.log(back.height);
         //const robot = this.add.image(window.innerWidth/2, window.innerHeight/2, 'robot');
         //robot.setInteractive({
         //    useHandCursor: true
@@ -87,6 +97,8 @@ class title extends Phaser.Scene {
         window.addEventListener('resize', () => {
             this.game.scale.resize(window.innerWidth, window.innerHeight);
             back.setPosition(window.innerWidth/2,window.innerHeight/2);
+            //const sc = window.innerHeight/back.height;
+            //back.setSize(back.width*sc,back.height*sc).setDisplaySize(back.width,back.height);
             //robot.setPosition(window.innerWidth/2,window.innerHeight/2);
             container.setPosition(window.innerWidth/2,window.innerHeight/2);
 

@@ -29,7 +29,6 @@ class loading extends Phaser.Scene {
         this.scene.scene.load.on('complete', this._fadeoutMainCamera.bind(this));
 
         this.load.image('street', 'street.png');
-        this.load.image('robot', 'robot.png');
         this.load.image('title', 'title.png');
         this.load.image('maru','maru.png');
         this.load.image('batu','batu.png');
@@ -40,6 +39,10 @@ class loading extends Phaser.Scene {
         this.load.image('play', 'play.png');
         this.load.image('kotatu', 'kotatu.png');
         this.load.image('hand', 'hand.png');
+        this.load.image('catbefore','catbefore.png');
+        this.load.image('catafter','catafter.png');
+        this.load.image('clear','clear.png');
+        this.load.image('gameover','gameover.png');
 
 
     }
