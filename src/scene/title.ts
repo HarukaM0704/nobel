@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import fit from '../class/fit'
 
 class title extends Phaser.Scene {
     constructor() {
@@ -18,7 +19,29 @@ class title extends Phaser.Scene {
 
         console.log('width:'+ window.innerWidth+ '  height:' + window.innerHeight);
 
-        const fit = () => {            
+/*        const fit = () => {            
+            const scw = window.innerWidth/back.width;
+            const sch = window.innerHeight/back.height;
+
+            if(window.innerHeight>window.innerWidth){
+                if(back.height>window.innerHeight){
+                    back.setDisplaySize(back.height*sch,back.width*scw)
+                    container.setDisplaySize(back.height*sch,back.width*scw);
+
+                } else {
+                    back.setDisplaySize(back.height,back.width*scw);
+                    container.setDisplaySize(back.height,back.width*scw);
+                }
+            }else{
+                if(back.width>window.innerWidth){
+                    back.setDisplaySize(back.width*scw,back.height*sch);
+                    container.setDisplaySize(back.width*scw,back.height*sch);
+                } else {
+                    back.setDisplaySize(back.width,back.height*sch);
+                    container.setDisplaySize(back.width,back.height*sch);
+                }
+            }
+
             if(window.innerHeight>window.innerWidth){
                 if(win.height<window.innerHeight){
                     this.game.scale.displaySize.setAspectRatio( window.innerHeight/window.innerWidth );
@@ -32,22 +55,12 @@ class title extends Phaser.Scene {
                 this.cameras.main.setRotation(0);
             }
         }
-
+*/
         //let clicktext;
 
         //this.cameras.main.fadeIn(1000, 0, 0, 0);    //時間、R,G,B
 
         const back = this.add.image(window.innerWidth/2, window.innerHeight/2, 'title');
-        const scw = window.innerWidth/back.width;
-        const sch = window.innerHeight/back.height;
-
-        if(window.innerHeight>window.innerWidth){
-            back.setSize(back.height,back.width*scw).setDisplaySize(back.width,back.height);
-        }else{
-            back.setSize(back.width,back.height*sch).setDisplaySize(back.width,back.height);
-        }
-        console.log(back.width);
-        console.log(back.height);
         //const robot = this.add.image(window.innerWidth/2, window.innerHeight/2, 'robot');
         //robot.setInteractive({
         //    useHandCursor: true
@@ -66,6 +79,7 @@ class title extends Phaser.Scene {
             useHandCursor: true
         });
 
+        
         container.add([playbtn, howtobtn]);
 
         playbtn.on('pointerover', () => {
@@ -91,8 +105,8 @@ class title extends Phaser.Scene {
         howtobtn.on('pointerout', () => {
             howtobtn.setAlpha(0.7);
         })
-
-        fit();
+        
+        fit(this,back,container,win);
 
         window.addEventListener('resize', () => {
             this.game.scale.resize(window.innerWidth, window.innerHeight);
@@ -101,8 +115,7 @@ class title extends Phaser.Scene {
             //back.setSize(back.width*sc,back.height*sc).setDisplaySize(back.width,back.height);
             //robot.setPosition(window.innerWidth/2,window.innerHeight/2);
             container.setPosition(window.innerWidth/2,window.innerHeight/2);
-
-            fit();
+            fit(this,back,container,win);
             win.height=window.innerHeight;
             win.width=window.innerWidth;
 

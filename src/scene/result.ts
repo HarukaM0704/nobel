@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import fit from "../class/fit";
 
 class result extends Phaser.Scene {
 
@@ -13,21 +14,6 @@ class result extends Phaser.Scene {
             height: window.innerHeight
         }
 
-        const fit = () => {            
-            if(window.innerHeight>window.innerWidth){
-                if(win.height<window.innerHeight){
-                    this.game.scale.displaySize.setAspectRatio( window.innerHeight/window.innerWidth );
-                }
-                this.cameras.main.setRotation(Math.PI * 0.5);
-                
-            } else {
-                if(win.width<window.innerWidth){
-                    this.game.scale.displaySize.setAspectRatio( window.innerWidth/window.innerHeight );
-                }
-                this.cameras.main.setRotation(0);
-            }
-        }
-
         //結果で出力内容が変わる
         let back: Phaser.GameObjects.Image;
         if(data.result){
@@ -36,14 +22,6 @@ class result extends Phaser.Scene {
         } else {
             //ゲームオーバーパターン
             back = this.add.image(window.innerWidth/2, window.innerHeight/2, 'gameover');
-        }
-
-        const scw = window.innerWidth/back.width;
-        const sch = window.innerHeight/back.height;
-        if(window.innerHeight>window.innerWidth){
-            back.setSize(back.height,back.width*scw).setDisplaySize(back.width,back.height);
-        }else{
-            back.setSize(back.width,back.height*sch).setDisplaySize(back.width,back.height);
         }
 
         //共通パーツ（TOPに戻るボタンともう一度遊ぶボタン)
@@ -65,7 +43,17 @@ class result extends Phaser.Scene {
 
         container.add([topbtn, playbtn]);
 
-        fit();
+        fit(this,back,container,win);
+
+        window.addEventListener('resize', () => {
+            this.game.scale.resize(window.innerWidth, window.innerHeight);
+            back.setPosition(window.innerWidth/2,window.innerHeight/2);
+            container.setPosition(window.innerWidth/2,window.innerHeight/2);
+            fit(this,back,container,win);
+            win.height=window.innerHeight;
+            win.width=window.innerWidth;
+
+        });
     }
 }
 
